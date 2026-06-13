@@ -1,4 +1,5 @@
-base_currency: USDT
+currency: USDT
 tickers_of_interest:
   - BTCUSDT
 interval: 1h
+parameters:

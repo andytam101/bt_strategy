@@ -1,4 +1,3 @@
-from main import _Template
+from _template.main import _TemplateStrategy
 
-
-__all__ = ["_Template"]
+__all__ = ["_TemplateStrategy"]
