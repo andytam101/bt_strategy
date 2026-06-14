@@ -33,19 +33,15 @@ jobs:
         run: pip install -e bt_sdk
 
       - name: Install dependencies
-        working-directory: bt_strategy
         run: pip install -e ".[dev]"
 
       - name: Format check
-        working-directory: bt_strategy
         run: |
           ruff format --check .
           ruff check .
 
       - name: Type check
-        working-directory: bt_strategy
         run: mypy .
 
       - name: Test
-        working-directory: bt_strategy
         run: pytest
