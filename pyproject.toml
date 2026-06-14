@@ -10,6 +10,7 @@ dev = ["mypy>=1.9,<2", "pydantic>=2.0", "ruff>=0.5", "pytest>=8.0", "types-PyYAM
 [tool.mypy]
 python_version = "3.12"
 strict = true
+explicit_package_bases = true
 plugins = ["pydantic.mypy"]
 
 [tool.pydantic-mypy]

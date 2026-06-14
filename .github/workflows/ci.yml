@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "bt_strategy/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [master]
+    paths:
+      - "bt_strategy/**"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout bt_sdk
+        uses: actions/checkout@v4
+        with:
+          repository: andytam101/bt_sdk
+          path: bt_sdk
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install bt_sdk
+        run: pip install -e bt_sdk
+
+      - name: Install dependencies
+        working-directory: bt_strategy
+        run: pip install -e ".[dev]"
+
+      - name: Format check
+        working-directory: bt_strategy
+        run: |
+          ruff format --check .
+          ruff check .
+
+      - name: Type check
+        working-directory: bt_strategy
+        run: mypy .
+
+      - name: Test
+        working-directory: bt_strategy
+        run: pytest
