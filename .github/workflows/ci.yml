@@ -3,13 +3,8 @@ name: CI
 on:
   push:
     branches: [master]
-    paths:
-      - "bt_strategy/**"
-      - ".github/workflows/**"
   pull_request:
     branches: [master]
-    paths:
-      - "bt_strategy/**"
 
 jobs:
   ci:
