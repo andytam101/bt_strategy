@@ -97,7 +97,7 @@ class BacktestTrader(Trader):
         # record current wealth first
         reference_time = get_closing_time(klines)
         self.wealth_history.append((reference_time, self.evaluate_wealth()))
-        
+
         self.next_klines = klines
         for symbol, kline in klines.items():
             history = self.price_histories.setdefault(symbol, [])
