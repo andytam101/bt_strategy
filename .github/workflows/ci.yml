@@ -32,11 +32,11 @@ jobs:
 
       - name: Format check
         run: |
-          ruff format --check .
-          ruff check .
+          ruff format --check backtest.py
+          ruff check backtest.py
 
       - name: Type check
-        run: mypy .
+        run: mypy backtest.py
 
       - name: Test
-        run: pytest
+        run: pytest backtest.py

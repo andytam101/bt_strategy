@@ -20,7 +20,7 @@ format:
 	$(RUFF) check --fix .
 
 test:
-	$(PYTEST)	
+	$(PYTEST)
 
 .PHONY: develop type-check format test clean
 

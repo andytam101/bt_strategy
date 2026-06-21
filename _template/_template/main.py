@@ -1,12 +1,33 @@
 from datetime import datetime
+from typing import Mapping
 
 from contracts.bots import Strategy, StrategySettings, Trader
-from contracts.market.data import KLine
+from contracts.engine import Bank, KLineStreamer
+from contracts.market import KLine, OrderResult
 
 
 class _TemplateStrategy(Strategy):
-    def __init__(self, *, trader: Trader, init_balance: int, settings: StrategySettings) -> None:
-        super().__init__(trader=trader, init_balance=init_balance, settings=settings)
+    def __init__(
+        self,
+        *,
+        bot_id: str,
+        kline_streamer: KLineStreamer,
+        trader: Trader,
+        bank: Bank,
+        backfilled_data: dict[str, list[KLine]],
+        settings: StrategySettings,
+    ) -> None:
+        super().__init__(
+            bot_id=bot_id,
+            kline_streamer=kline_streamer,
+            trader=trader,
+            bank=bank,
+            backfilled_data=backfilled_data,
+            settings=settings,
+        )
 
-    async def on_tick(self, *, reference_time: datetime, kline_data: dict[str, KLine]) -> None:
-        raise NotImplementedError("TODO: implement on_tick logic for _TemplateStrategy")
+    def on_order_result(self, reference_time: datetime, order_result: OrderResult) -> None:
+        raise NotImplementedError("TODO: implement on_order_result")
+
+    def on_tick(self, reference_time: datetime, kline_data: Mapping[str, KLine]) -> None:
+        raise NotImplementedError("TODO: implement on_tick")
